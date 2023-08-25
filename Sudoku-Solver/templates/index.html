@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sudoku Solver</title>
+    <style>
+        /* Center the content */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        /* Add a shadow and background to tables */
+        table {
+            border-collapse: collapse;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            margin: 20px;
+        }
+
+        /* Style table cells */
+        td {
+            border: 1px solid #ccc;
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            font-size: 18px;
+            background-color: #f9f9f9;
+        }
+
+        /* Highlight cells with numbers */
+        td:not(:empty) {
+            background-color: #d1e9ff;
+        }
+
+        /* Add thicker borders for Sudoku blocks (3x3) */
+        td:nth-child(3n), td:nth-child(3n-1), td:nth-child(3n-2),
+        tr:nth-child(3n) td:nth-child(-n + 3), tr:nth-child(3n+1) td:nth-child(-n + 3), tr:nth-child(3n+2) td:nth-child(-n + 3) {
+            border-right: 2px solid #000;
+            border-left: 2px solid #000;
+        }
+        tr:nth-child(3n) td,
+        tr:nth-child(3n-1) td,
+        tr:nth-child(3n-2) td {
+            border-bottom: 2px solid #000;
+            border-top: 2px solid #000;
+        }
+    </style>
+</head>
+<body>
+    {% for result in results %}
+        <table>
+            {% for row in result %}
+                <tr>
+                    {% for cell in row %}
+                        <td>{{ cell }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </table>
+    {% endfor %}
+</body>
+</html>
