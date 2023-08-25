@@ -1,4 +1,18 @@
 def is_valid_move(grid, row, col, num):
+    
+    """
+    Check if placing 'num' in the specified cell is a valid move.
+
+    Args:
+        grid (list[list[int]]): The Sudoku grid.
+        row (int): The row index of the cell.
+        col (int): The column index of the cell.
+        num (int): The number to be placed in the cell.
+
+    Returns:
+        bool: True if placing 'num' in the cell is a valid move, False otherwise.
+    """
+
     for x in range(9):
         if grid[row][x] == num:
             return False

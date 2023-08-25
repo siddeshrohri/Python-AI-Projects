@@ -1,23 +1,25 @@
 from Backtracking import sudoku_solve
+import test_cases
 
 def print_grid(grid):
+
+    """
+    Print the given Sudoku grid in a readable format.
+
+    Args:
+        grid (list[list[int]]): The Sudoku grid to be printed.
+    """
+
     for row in grid:
         for num in row:
             print(num, end=" ")
         print()
 
-def main():
-    grid = [
-        [0, 0, 0, 0, 0, 0, 6, 8, 0],
-        [0, 0, 0, 0, 7, 3, 0, 0, 9],
-        [3, 0, 9, 0, 0, 0, 0, 4, 5],
-        [4, 9, 0, 0, 0, 0, 0, 0, 0],
-        [8, 0, 3, 0, 5, 0, 9, 0, 2],
-        [0, 0, 0, 0, 0, 0, 0, 3, 6],
-        [9, 6, 0, 0, 0, 0, 3, 0, 8],
-        [7, 0, 0, 6, 8, 0, 0, 0, 0],
-        [0, 2, 8, 0, 0, 0, 0, 0, 0]
-    ]
+def main(grid):
+
+    """
+    Main function to solve and print a Sudoku puzzle.
+    """
 
     if sudoku_solve(grid):
         print_grid(grid)
@@ -25,4 +27,11 @@ def main():
         print("No solution exists.")
 
 if __name__ == "__main__":
-    main()
+    main(test_cases.test_case_1)
+    print()
+    main(test_cases.test_case_2)
+    print()
+    main(test_cases.test_case_3)
+    print()
+    main(test_cases.test_case_4)
+    print()
