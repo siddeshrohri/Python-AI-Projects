@@ -5,7 +5,7 @@ import json
 
 # Requests the data from the API
 res = requests.get('https://min-api.cryptocompare.com/data/v2/histoday?fsym=BTC&tsym=USD&limit=500')
-# Stored the JSOn response in the variable to avoid multiple calls 
+# Stored the JSON response in the variable to avoid multiple calls 
 json_data = json.loads(res.content)
 # Addition of a condition to check if the expected keys are present in the JSON structure 
 if 'Data' in json_data and 'Data' in json_data['Data']:
