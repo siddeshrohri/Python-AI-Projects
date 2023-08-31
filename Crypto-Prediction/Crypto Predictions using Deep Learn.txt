@@ -1,0 +1,90 @@
+Crypto Predictions using Deep Learning:-
+
+A four step process to predict the cryptocurrency prices:-
+	- Collecting real time cryptocurrency data
+	- Prepare the data for training and testing
+	- Using the neural network LSTM for the process of predicting the data
+	- Visualizing the data for the actual data collected and the predicted data using LSTM neural network after training the model
+
+Challenging feature:-
+	-  Need to make sure the volatility of the market prices
+	- Consider features such as volumes, open price, highest price and lowest price of the day present in the dataset.
+
+Dataset:-
+	- CryptoCompare
+	- Data World
+	- Kaggle
+	- CryptoDataDownload
+
+Dataset Features:- 
+	- Closing Price:-
+		- Market close price for the current day
+	- High Price:- 
+		- Highest price on the market for the day
+	- Low Price:- 
+		- Lowest price on the market for the day
+	- Open Price:- 
+		- Price at which the market opens
+	- Volume:- 
+		- The amount of currency being traded for the given day
+Dependencies:- 
+	- requests:- 
+		- to send requests to the website to ectract the data from
+	- matplotlib:-
+		- to visualize the data 
+	- numpy:- 
+		- to store the values in the arrays to prepare the data for learning and testing
+	- pandas:- 
+		- Since we are accessing datasets, to store the real-time data into the pandas framwork.
+	- sklearn
+		- To implement Machin Learning models and Statistical Modelling
+	- DateTime
+		- To check for real time data handling 
+
+Implementation of the Dataset:- 
+	- Training Dataset
+		- 80%
+	- Test set
+		- 20%
+
+Plotting the dataset:-
+	- To check for the training data on the graph
+	- To check for the test data on the graph 
+
+TO WORK ON NEURAL NETWORKS:-
+
+Normalization:- 
+	- A technique often applied as a part of data preparation for machine learning.
+	- It is used to change the values of numeric columns in the dataset to a common scale, without distorting the differences in the ranges of values.
+
+	- Preparing the data to be fed into the neural network
+	- Again splitting the dataset into training 80% and testing 20%
+
+LSTM:-
+ 	- Works by using special gates to allow each LSTM layer to take information from previous and the currect layer.
+	- The gates through which the data goes through are (forget gate, input gate, etc.)
+	- Activation functions which it works on are (tanh function, relu function, etc.)
+	- ADvantage of the LSTM cells are that it remembers patterns for a certain amount of time.
+	- To build the model, Sequential model is used for stacking all the layers  (input, output and hidden)
+	- the LSTM neural network layer comprises of LSTM layer, 20% Dropout layer and a Dense Layer with linear activation function
+	- compiling the model using Adam as the optimizer and Mean Squared Error as the loss function
+	- Some other parameters that can be used for training the model are:-
+		- Random number seed
+		- Length of the window
+		- Test set size
+		- Number of neurons in the LSTM Layer
+		- epochs
+		- batch sizes
+		- loss
+		- dropouts
+		- optimizer
+	- Training the model using inputs x_train and labels y_train
+	- Testing the model using inputs X_test and labels Y_test
+	- The evaluation metric used is Mean Absolute Error (MAE)
+
+Mean Absolute Error (MAE):- 
+	- Measuring the average magnitude of the errors in a set of predictions without considering thier directions.
+	- Average over the test sample of the absolute differences between actual and predicted observations where all indiviual differences have equal weight
+	- Formula:- 
+		- MAE = (1/n)*(Σ j=1 to n)|yj - y(unitvector)j|
+	- Line graph plotting 
