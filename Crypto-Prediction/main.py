@@ -63,3 +63,8 @@ def line_plot(line1, line2, label1=None, label2=None, title='', lw=2):
     plt.show()
 # Passes the values to the function
 line_plot(train[target_col], test[target_col], 'training', 'test', title='')
+
+# Normalizing a function using min_max algorithm
+def normalize_min_max(df):
+    # Formula for normalizing the function
+    return (df - df.min()) / (df.max() - df.min())
