@@ -68,3 +68,21 @@ line_plot(train[target_col], test[target_col], 'training', 'test', title='')
 def normalize_min_max(df):
     # Formula for normalizing the function
     return (df - df.min()) / (df.max() - df.min())
+
+# Extracts the windowed data from the DataFrame
+# PARAMS:- DataFrame(df), Length of the window to be extracted (window_len), Normalize the rows of data (zero_base)
+def windowed_data_extraction(df, window_len = 5, zero_base = True):
+    # Creating an empty list which will contain all windows
+    windowed_data = []
+    # Loop through each entry in the time series dataset
+    for idx in range((len(df)-window_len)):
+        # Slicing the DataFrame to extract a window of rows with a length of window_len using idx variable as the starting index
+        tmp = df[idx: (idx + window_len)].copy()
+        # Checks for the condition of the zero_base value
+        if not zero_base == False :
+            # Normalizes the values of the windowed data using the above function call
+            tmp = normalize_min_max(tmp)
+            # Appends the value of the normalized values into the empty list
+        windowed_data.append(tmp.values())
+    # Converts it back into numpy array format so that we can use it further down
+    return np.array(windowed_data)
