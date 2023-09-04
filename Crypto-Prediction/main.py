@@ -117,7 +117,7 @@ def prepare_data(df, target_col, window_len=10, zero_base=True, test_size=0.2):
 
 # Creating a LSTM nueral network model using the Keras library
 # Params:- input_data, output_size, neurons, activ_function, dropout, loss, optimizer
-def build_lstm_model(input_data, output_size, neurons=100, activ_functions='linear', dropout=0.2, loss='mse', optimizer='adam'):
+def build_lstm_model(input_data, output_size, neurons=100, activ_func='linear', dropout=0.2, loss='mse', optimizer='adam'):
     # Creating a Sequential model
     model = Sequential()
     # Adding a LSTM layer to the model
@@ -128,3 +128,9 @@ def build_lstm_model(input_data, output_size, neurons=100, activ_functions='line
     model.add(Dropout(dropout))
     # Dense layer responsible for producing the final output of the model
     model.add(Dense(units=output_size))
+    # Adds an activation function to the output of the Dense layer
+    model.add(Activation(activ_func))
+    # line complies the model
+    model.complile(loss=loss, optimizer=optimizer)
+    # Return the complied LSTM Model
+    return model
