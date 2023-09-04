@@ -64,6 +64,10 @@ def line_plot(line1, line2, label1=None, label2=None, title='', lw=2):
 # Passes the values to the function
 line_plot(train[target_col], test[target_col], 'training', 'test', title='')
 
+# Performs zero_based normalization on the data within the DataFrame
+def normalise_zero_base(df):
+    return df / df.iloc[0] - 1
+
 # Normalizing a function using min_max algorithm
 def normalize_min_max(df):
     # Formula for normalizing the function
@@ -81,8 +85,14 @@ def windowed_data_extraction(df, window_len = 5, zero_base = True):
         # Checks for the condition of the zero_base value
         if not zero_base == False :
             # Normalizes the values of the windowed data using the above function call
-            tmp = normalize_min_max(tmp)
+            tmp = normalise_zero_base(tmp)
             # Appends the value of the normalized values into the empty list
         windowed_data.append(tmp.values())
     # Converts it back into numpy array format so that we can use it further down
     return np.array(windowed_data)
+
+# Preparing the data to feed into the neural network
+# The repeat process of splitting the data into two datasets
+# Training dataset - 80% and Testing dataset - 20%
+def prepare_data(df, target_col, window_len=10, zero_base=True, test_size=0.2):
+    train_data, test_data = train_test_split(df, test_size=test_size)
