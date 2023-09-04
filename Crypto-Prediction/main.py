@@ -114,3 +114,9 @@ def prepare_data(df, target_col, window_len=10, zero_base=True, test_size=0.2):
         y_test = y_test / test_data[target_col][:-window_len].values - 1
 
     return train_data, test_data, X_train, X_test, y_train, y_test
+
+# Creating a LSTM nueral network model using the Keras library
+# Params:- input_data, output_size, neurons, activ_function, dropout, loss, optimizer
+def build_lstm_model(input_data, output_size, neurons=100, activ_functions='linear', dropout=0.2, loss='mse', optimizer='adam'):
+    model = Sequential()
+    
