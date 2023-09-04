@@ -118,5 +118,13 @@ def prepare_data(df, target_col, window_len=10, zero_base=True, test_size=0.2):
 # Creating a LSTM nueral network model using the Keras library
 # Params:- input_data, output_size, neurons, activ_function, dropout, loss, optimizer
 def build_lstm_model(input_data, output_size, neurons=100, activ_functions='linear', dropout=0.2, loss='mse', optimizer='adam'):
+    # Creating a Sequential model
     model = Sequential()
-    
+    # Adding a LSTM layer to the model
+    model.add(LSTM(neurons, input_shape=(input_data.shape[1], input_data.shape[2])))
+    # Adding a dropout layer to the model
+    # Dropout is a regularization technique that randomly sets a fraction of input units to 0 during training to prevent overfitting
+    # The dropout rate is specified by the 'dropout' parameter
+    model.add(Dropout(dropout))
+    # Dense layer responsible for producing the final output of the model
+    model.add(Dense(units=output_size))
