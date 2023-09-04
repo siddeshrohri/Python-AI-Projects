@@ -96,3 +96,11 @@ def windowed_data_extraction(df, window_len = 5, zero_base = True):
 # Training dataset - 80% and Testing dataset - 20%
 def prepare_data(df, target_col, window_len=10, zero_base=True, test_size=0.2):
     train_data, test_data = train_test_split(df, test_size=test_size)
+    # Windowing the training set
+    X_train = windowed_data_extraction(train_data, window_len, zero_base)
+    # Windowing the testing set
+    X_test = windowed_data_extraction(test_data, window_len, zero_base)
+    # Slicing the values of the training DataSet 
+    y_train = train_data[target_col][window_len:].values
+    # Converting them into one-hot encoding format
+    y_test = test_data[target_col][window_len:].values
