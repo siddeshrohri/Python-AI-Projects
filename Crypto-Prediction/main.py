@@ -134,3 +134,16 @@ def build_lstm_model(input_data, output_size, neurons=100, activ_func='linear', 
     model.complile(loss=loss, optimizer=optimizer)
     # Return the complied LSTM Model
     return model
+
+# random numpy generator
+np.random.seed(42)
+window_len=5
+test_size=0.2
+zero_base=True
+lstm_neurons=100
+epochs=20
+batch_size=32
+loss='mse'
+dropout=0.2
+optimizer='adam'
+
