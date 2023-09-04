@@ -104,3 +104,13 @@ def prepare_data(df, target_col, window_len=10, zero_base=True, test_size=0.2):
     y_train = train_data[target_col][window_len:].values
     # Converting them into one-hot encoding format
     y_test = test_data[target_col][window_len:].values
+    # Checks for the condition of the zero_base value
+    if not zero_base == False :
+        # Similar to the zero_based_normalization technique
+        # Perform zero-based normalization on the training target variable y_train
+        # by scaling values relative to the initial value (first row of target_col)
+        # and ensuring that the initial value becomes zero
+        y_train = y_train / train_data[target_col][:-window_len].values - 1
+        y_test = y_test / test_data[target_col][:-window_len].values - 1
+
+    return train_data, test_data, X_train, X_test, y_train, y_test
