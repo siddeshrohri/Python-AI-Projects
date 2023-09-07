@@ -13,9 +13,17 @@ import json
 # Removing the columns from the DataFrame
 # Prints all the values from High to Low of the currency 
 api = 'https://min-api.cryptocompare.com/data/histoday'
-requests_input = requests.get(api + '?fsym=BTC&tsym=CAD&limit=500')
-hist = pd.DataFrame(json.loads(requests_input.content)['Data'])
-hist = hist.set_index('time')
-hist.index = pd.to_datetime(hist.index, unit='s')
-hist.drop(["conversionType", "conversionSymbol"], axis = 'columns', inplace = True)
+params ={
+    'fsym' : 'BTC',
+    'tsym' : 'CAD',
+    'limit': 500
+}
+response = requests.get(api, params=params)
+data = response.json()['Data']
+hist = (
+    pd.DataFrame(data)
+    .set_index('time')
+    .assign(time=lambda x: pd.to_datetime(x.index, unit='s'))
+    .drop(columns=["conversionType", "conversionSymbol"])
+)
 print(hist.head(5))
