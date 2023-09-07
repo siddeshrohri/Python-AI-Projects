@@ -74,3 +74,20 @@ def graph(line1, line2, label1=None, label2=None, title=''):
     ax.legend(loc = "best", fontsize = 16)
 graph(train[close], test[close], 'training', 'test', title="")
 plt.show()
+
+''' NORMALIZING THE DATA '''
+
+# Using the ZERO BASELINE normalization technique
+# This part of the code divides every value in the dataframe by the first element 
+# Essentially it calculates the relative change of each data point compared  to the initial values, centers around zero
+# Subtracting one from the resultant value , this step is done to represent the relative change as a percentage change
+def normalization_zero_baseline(df):
+    normalizing = df / df.iloc[0] - 1
+    return normalizing
+
+# Using the MIN MAX SCALING normalization technique
+# Subtracting the minimum value of the dataframe from every datapoint
+# Dividing each point by its maximum value minus it's minumum value
+def normalization_min_max_scaling(df):
+    normalizing = (df - df.min()) / (df.max() - df.min())
+    return normalizing
