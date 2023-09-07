@@ -41,3 +41,4 @@ def train_test_split(df, test_size=0.2):
     train_data = df.iloc[:row]
     test_data = df.iloc[row:]
     return train_data, test_data
+train_test_split(hist, test_size=0.2)
