@@ -91,3 +91,22 @@ def normalization_zero_baseline(df):
 def normalization_min_max_scaling(df):
     normalizing = (df - df.min()) / (df.max() - df.min())
     return normalizing
+
+''' EXTRACTING WINDOWED DATA '''
+
+# Extracts windowed sequences of data from the DataFrame
+# Creating input samples for a LSTM neural network model
+# Initializing an empty array where the extracted windowed sequences of data will be stored
+# Iterating through a DataFrame over the rows of the DataFrame to create the sliding windows
+# Slicing the DataFrame according to the index
+# If the zero_base is true, normalization is performed on the dataset
+# The normalized values are appended to the array
+# Converts the windowed sequences of data into numpy array 
+def extracting_windowed_data(df, window_len = 5, zero_base = True):
+    windowed_data = []
+    for idx in range(len(df) - window_len):
+        tmp = df[idx: (idx + window_len)].copy()
+        if zero_base:
+            tmp = normalization_zero_baseline(tmp)
+        windowed_data.append(tmp.values)
+    return np.array(windowed_data)
