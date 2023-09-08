@@ -102,11 +102,11 @@ def normalization_min_max_scaling(df):
 # If the zero_base is true, normalization is performed on the dataset
 # The normalized values are appended to the array
 # Converts the windowed sequences of data into numpy array 
-def extracting_windowed_data(df, window_len = 5, zero_base = True):
-    windowed_data = []
+def extract_windowed_data(df, window_len=5, zero_base=True):
+    windowed_sequences = []
     for idx in range(len(df) - window_len):
-        tmp = df[idx: (idx + window_len)].copy()
+        window = df[idx : (idx + window_len)].copy()
         if zero_base:
-            tmp = normalization_zero_baseline(tmp)
-        windowed_data.append(tmp.values)
-    return np.array(windowed_data)
+            window = normalization_zero_baseline(window)
+        windowed_sequences.append(window.values)
+    return np.array(windowed_sequences)
