@@ -107,6 +107,23 @@ def extract_windowed_data(df, window_len=5, zero_base=True):
     for idx in range(len(df) - window_len):
         window = df[idx : (idx + window_len)].copy()
         if zero_base:
-            window = normalization_zero_baseline(window)
+            window = normalization_min_max_scaling(window)
         windowed_sequences.append(window.values)
     return np.array(windowed_sequences)
+
+''' PREPARING THE DATA FOR TRAINING '''
+
+# Splitting the data into training and testing sets
+# Extracting windowed sequences for training and testing
+# Extracting target values for training and testing
+# Optionally applying zero baseline normalization to target values
+# Returning prepared datasets
+def preparing_the_data(df, close, window_len = 10, zero_base = True, test_size = 0.2):
+    train_data, test_data = train_test_split(df, test_size=test_size)
+    X_train = extract_windowed_data(train_data, window_len, zero_base)
+    X_test = extract_windowed_data(test_data, window_len, zero_base)
+    y_train = train_data[close][window_len:].values
+    y_test = test_data[close][window_len:].values
+    if zero_base:
+        y_train = y_train / train_data[close][:-window_len].values - 1
+    return train_data, test_data, X_train, X_test, y_train, y_test
