@@ -5,7 +5,6 @@ from keras.layers import Activation, Dense, Dropout, LSTM
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import seaborn as sns
 from sklearn.metrics import mean_absolute_error
 from sklearn.model_selection import train_test_split
 
@@ -15,7 +14,7 @@ def fetch_crypto_data():
     params = {
         'fsym': 'BTC',
         'tsym': 'CAD',
-        'limit': 500
+        'limit': 2000  # Fetch more historical data
     }
     response = requests.get(api, params=params)
     data = response.json()['Data']
@@ -71,7 +70,7 @@ def prepare_data(df, target_col, window_len=10, zero_base=True, test_size=0.2):
 
     return train_data, test_data, X_train, X_test, y_train, y_test
 
-def build_lstm_model(input_data, output_size, neurons=100, activ_func='linear',
+def build_lstm_model(input_data, output_size, neurons=500, activ_func='linear',
                      dropout=0.2, loss='mse', optimizer='adam'):
     model = Sequential()
     model.add(LSTM(neurons, input_shape=(input_data.shape[1], input_data.shape[2])))
@@ -87,8 +86,8 @@ def main():
     window_len = 5
     test_size = 0.2
     zero_base = True
-    lstm_neurons = 100
-    epochs = 20
+    lstm_neurons = 500
+    epochs = 30
     batch_size = 32
     loss = 'mse'
     dropout = 0.2
@@ -98,6 +97,9 @@ def main():
     hist = fetch_crypto_data()
     train, test, X_train, X_test, y_train, y_test = prepare_data(
         hist, close, window_len=window_len, zero_base=zero_base, test_size=test_size)
+
+    # Additional Feature Engineering (e.g., rolling averages, momentum indicators) can be done here
+    
     model = build_lstm_model(
         X_train, output_size=1, neurons=lstm_neurons, dropout=dropout, loss=loss,
         optimizer=optimizer)
